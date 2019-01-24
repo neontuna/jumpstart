@@ -123,13 +123,13 @@ end
 def add_sidekiq
   environment "config.active_job.queue_adapter = :sidekiq"
 
-  insert_into_file "config/routes.rb",
-    "require 'sidekiq/web'\n\n",
-    before: "Rails.application.routes.draw do"
+#   insert_into_file "config/routes.rb",
+#     "require 'sidekiq/web'\n\n",
+#     before: "Rails.application.routes.draw do"
 
-  insert_into_file "config/routes.rb",
-    "  authenticate :user, lambda { |u| u.admin? } do\n    mount Sidekiq::Web => '/sidekiq'\n  end\n\n",
-    after: "Rails.application.routes.draw do\n"
+#   insert_into_file "config/routes.rb",
+#     "  authenticate :user, lambda { |u| u.admin? } do\n    mount Sidekiq::Web => '/sidekiq'\n  end\n\n",
+#     after: "Rails.application.routes.draw do\n"
 end
 
 def add_foreman
@@ -224,16 +224,16 @@ add_template_repository_to_source_path
 add_gems
 
 after_bundle do
-  set_application_name
+  #set_application_name
   stop_spring
   add_users
   add_bootstrap
   add_sidekiq
   add_foreman
   add_webpack
-  add_announcements
-  add_notifications
-  add_multiple_authentication
+  #add_announcements
+  #add_notifications
+  #add_multiple_authentication
   add_friendly_id
 
   copy_templates
@@ -243,9 +243,9 @@ after_bundle do
   rails_command "db:migrate"
 
   # Migrations must be done before this
-  add_administrate
+  #add_administrate
 
-  add_app_helpers_to_administrate
+  #add_app_helpers_to_administrate
 
   add_whenever
 
